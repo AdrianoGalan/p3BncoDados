@@ -1,0 +1,98 @@
+<form class="needs-validation" novalidate [formGroup]="materiaForm" style="padding-top: 10px">
+  <div class="row g-3" style="margin-top: 5px;">
+    <div class="float-start">
+      <h2 class="text-center">Disciplina Notas</h2>
+    </div>
+
+
+    <div class="col-sm-2">
+      <label class="form-label">Codigo</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matCodigo" placeholder="Codigo">
+      </fieldset>
+    </div>
+    <div class="col-sm-8">
+      <label class="form-label">Nome</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matNome" placeholder="Nome">
+      </fieldset>
+    </div>
+    <div class="col-sm-2">
+      <label class="form-label">Turma</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matTurma" placeholder="turma">
+      </fieldset>
+    </div>
+
+  </div>
+
+
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-start">
+      <h4>Alunos Matriculados</h4>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table  table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
+      <thead>
+        <tr>
+          <th>Ra</th>
+          <th>Aluno</th>
+          <th>P1</th>
+          <th>P2</th>
+          <th>P3</th>
+          <th>T</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunosh">
+          <td class="col-sm-1">{{aluno.ra}}</td>
+          <td class="col-sm-6">{{aluno.nome}}</td>
+          <td>
+              <input type="number" class="form-control"   formControlName="p1" (blur)="onSalvar(aluno)"  placeholder="{{aluno.p1}}">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="p2" (blur)="onSalvar(aluno)" placeholder="{{aluno.p2}}">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="p3" (blur)="onSalvar(aluno)" placeholder="{{aluno.p3}}">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="t"  (blur)="onSalvar(aluno)" placeholder="{{aluno.t}}">
+          </td>
+          <td>
+            <!-- <span class="float-end">
+              <button class="btn btn-outline-info mb-1 btn-sm" (click)="onSalvar(aluno)" >
+                Salvar
+              </button>
+
+            </span> -->
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+    <div>
+      <span class="float-end">
+        <button class="btn btn-outline-info mb-1 btn-sm" (click)="onOk()" >
+          Ok
+        </button>
+
+      </span>
+    </div>
+
+
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+</form>
